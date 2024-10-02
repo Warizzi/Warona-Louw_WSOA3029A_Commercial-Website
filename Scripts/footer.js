@@ -1,12 +1,15 @@
 
-window.onload = function() {
-    const footer = document.createElement("footer"); //Creating footer element
-footer.id = "footer";
 
+const footer = document.querySelector("footer"); //Creating footer element
+
+injectFooter();
 //Footer content
-footer.innerHTML = "<p>@copyright Warona Louw | All rights reserved</p>";
+
 
 //Append footer to body
-document.body.appendChild(footer);
+ function injectFooter() {
+    let footerContent = `<p>@copyright Warona Louw | All rights reserved</p>`;
 
-};
+    footer.innerHTML = footerContent;
+ }
+
