@@ -29,8 +29,8 @@ function prepareDataForD3(genreCounts) {
 //Scatterplot code
 function createScatterplot(data) {
     let margin = { top:50, right: 30, bottom:100, left: 60};
-    let width = 800 - margin.left - margin.right;
-    let height = 500 - margin.top - margin.bottom;
+    let width = 1200 - margin.left - margin.right;
+    let height = 800 - margin.top - margin.bottom;
 
     const svg = d3.select('#chart')
     .append('svg')
@@ -60,16 +60,24 @@ function createScatterplot(data) {
     svg.append('g')
     .call(d3.axisLeft(y));
 
-    // Add scatterplot dots
-    svg.append('g')
-    .selectAll('dot')
+    // Create Scatterplots with initial position x=0, y=height
+    let dots = svg.append('g')
+    .selectAll('circle')
     .data(data)
     .enter()
     .append('circle')
-    .attr('cx', d => x(d.genre))
-    .attr('cy', d => y(d.popularity))
+    .attr('cx', 0)
+    .attr('cy', height)
     .attr('r', 7)
     .style('fill', '#23f9c8');
+
+
+    // Transition animation: moving points from the start to their final positions
+    dots.transition()
+        .duration(2000)  // Duration of the animation (1.5 seconds)
+        .delay((d, i) => i * 100)  // Delay for each point (to create shooting effect)
+        .attr('cx', d => x(d.genre))  // Move to final x position based on genre
+        .attr('cy', d => y(d.popularity));  // Move to final y position based on popularity
 
     //Adding Labels
     svg.append('text')
