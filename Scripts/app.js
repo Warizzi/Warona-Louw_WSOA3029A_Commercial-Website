@@ -54,7 +54,7 @@ function createScatterplot(data) {
 
     // Y-axis
     const y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.popularity)])
+    .domain([0, Math.max(65, d3.max(data, d => d.popularity))]) // Use 65 or higher based on data
     .range([height, 0]);
 
     svg.append('g')
