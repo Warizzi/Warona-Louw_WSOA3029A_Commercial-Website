@@ -1,6 +1,7 @@
 const mangaSection = document.getElementById('manga-list');
 const coverArtBaseURL = 'https://uploads.mangadex.org/covers/:manga-id/:cover-filename.{256, 512}.jpg';
 
+//create function to fetch data from API
 async function fetchManga() {
     try {
         const response = await fetch('https://api.mangadex.org/manga?limit=10');
@@ -17,6 +18,7 @@ async function fetchManga() {
     }
 }
 
+//Was meant to display images as well as descriptions
 function displayManga(mangaList) {
     if (!Array.isArray(mangaList)) {
         console.error('Error: mangaList is not an array', mangaList);
