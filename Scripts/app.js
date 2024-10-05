@@ -54,11 +54,15 @@ function createScatterplot(data) {
 
     // Y-axis
     const y = d3.scaleLinear()
-    .domain([0, Math.max(65, d3.max(data, d => d.popularity))]) // Use 1000 or higher based on data
+    .domain([0, Math.max(65, d3.max(data, d => d.popularity))]) // Use 65 or higher based on data
     .range([height, 0]);
 
     svg.append('g')
     .call(d3.axisLeft(y));
+
+    //Create a colour scale for genres
+    const colour = d3.scaleOrdinal(d3.schemeCategory10)
+    .domain(data.map(d => d.genre))
 
     // Create Scatterplots with initial position x=0, y=height
     let dots = svg.append('g')
@@ -66,10 +70,10 @@ function createScatterplot(data) {
     .data(data)
     .enter()
     .append('circle')
-    .attr('cx', 0)
-    .attr('cy', height)
+    .attr('cx', 0) //Starts scatttering at x=0 from the left
+    .attr('cy', height) //Begins at the bottom of the chart
     .attr('r', 7)
-    .style('fill', '#23f9c8');
+    .style('fill', d => colour(d.genre)); //Assigns colour based on genre
 
 
     // Transition animation: moving points from the start to their final positions
@@ -94,6 +98,44 @@ function createScatterplot(data) {
     .attr('x', -height / 2 + margin.top)
     .text('Popularity')
     .attr("class", "axis-label");
+
+    //Adding a legend 
+    let legend = svg.append('g')
+    .attr('transform', `translate(${width + -40}, 0)`); //Positions the legend to the right
+
+    // Calculate the size of the legend box
+let legendWidth = 150; // Width of the box
+let legendHeight = data.length * 25 + 20; // Height based on number of items + padding
+
+// Append a rectangle as the background for the legend
+legend.append('rect')
+    .attr('width', legendWidth)
+    .attr('height', legendHeight)
+    .attr('fill', '#f0f0f0') // Light grey background
+    .attr('stroke', '#000') // Black border
+    .attr('rx', 5) // Rounded corners
+    .attr('ry', 5); // Rounded corners
+
+    //create legend items
+    data.forEach ((d, i) => {
+        let legendItem = legend.append('g')
+        .attr('transform', `translate(0, ${i * 10 + 5})`);
+
+        //Creates a colourful circle for each genre
+        legendItem.append('circle')
+        .attr('cx', 0)
+        .attr('cy', 0)
+        .attr('r', 7)
+        .style('fill', colour(d.genre));
+
+        //Add text label for each genre
+        legendItem.append('text')
+        .attr('x', 20)
+        .attr('y', 5 )
+        .text(d.genre)
+        .style('font-size', '12px')
+        .attr('alignment-baseline', 'middle');
+    });
 }
 
 //Fetch data, process it, and create scatterplot
