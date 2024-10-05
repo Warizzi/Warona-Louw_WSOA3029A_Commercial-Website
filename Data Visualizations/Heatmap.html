@@ -11,6 +11,8 @@
     <title>Document</title>
     <script type="module"> import { initialise } from "../Scripts/menu.js"
         initialise("Data Visualizations") </script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../Scripts/app2.js"></script>
 </head>
 <body>
     <header>
@@ -25,6 +27,9 @@
     </header>
     <hr>
     <main>
+        <h3>Popularity HeatMap</h3>
+        <div id="chart"></div>
+
         <nav>
             <ul>
                 <li><a href="./Scatterplot.html">Scatterplot</a></li>
