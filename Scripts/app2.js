@@ -1,10 +1,11 @@
+// Fetch Manga data from the MangaDex API
 async function fetchMangaData() {
     const response = await fetch('https://api.mangadex.org/manga?limit=100');
     const data = await response.json();
     return data.data;
 }
 
-// Counts the number of manga for each genre
+// Count the number of manga for each genre
 function countGenres(mangaList) {
     const genreCounts = {};
     mangaList.forEach(manga => {
@@ -17,7 +18,7 @@ function countGenres(mangaList) {
     return genreCounts;
 }
 
-// Preparing data for D3
+// Prepare data for D3
 function prepareDataForD3(genreCounts) {
     return Object.keys(genreCounts).map(genre => ({
         genre: genre,
@@ -25,10 +26,24 @@ function prepareDataForD3(genreCounts) {
     }));
 }
 
+// Function to highlight the searched genre
+function highlightGenre(searchTerm, genreElements) {
+    // Reset the previous highlights
+    genreElements.attr('stroke', 'none').attr('stroke-width', 0);
+
+    if (searchTerm) {
+        // Highlight the matching genre
+        genreElements.filter(d => d.genre.toLowerCase().includes(searchTerm.toLowerCase()))
+            .attr('stroke', 'blue') //changed to blue highlight
+            .attr('stroke-width', 2);
+    }
+}
+
+// Create the heatmap visualization
 function createHeatmap(data) {
-    let margin = { top: 50, right: 150, bottom: 150, left: 60 };
-    let width = 1200 - margin.left - margin.right;
-    let height = 800 - margin.top - margin.bottom;
+    const margin = { top: 50, right: 150, bottom: 150, left: 60 };
+    const width = 1200 - margin.left - margin.right;
+    const height = 800 - margin.top - margin.bottom;
 
     const svg = d3.select('#chart')
         .append('svg')
@@ -38,29 +53,30 @@ function createHeatmap(data) {
         .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
     // Define color scale
+    const maxPopularity = d3.max(data, d => d.popularity);
     const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
-        .domain([0, d3.max(data, d => d.popularity)]);
+        .domain([0, maxPopularity]);
 
     // Define the x scale using d3.scaleBand with increased padding
     const xScale = d3.scaleBand()
-        .domain(data.map(d => d.genre)) // Use genre names for the scale
+        .domain(data.map(d => d.genre))
         .range([0, width])
-        .padding(0.5); // Increased padding for more space
+        .padding(0.5);
 
     // Append a tooltip div to the body
     const tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip") // You can style this class in CSS
+        .attr("class", "tooltip")
         .style("opacity", 0);
 
     // Create a heatmap cell for each genre
-    svg.selectAll('rect')
+    const genreElements = svg.selectAll('rect')
         .data(data)
         .enter()
         .append('rect')
-        .attr('x', d => xScale(d.genre)) // Use xScale to position rectangles
-        .attr('y', d => height - (d.popularity * (height / d3.max(data, d => d.popularity)))) // Adjust height based on popularity
-        .attr('width', xScale.bandwidth()) // Use the bandwidth for consistent widths
-        .attr('height', d => d.popularity * (height / d3.max(data, d => d.popularity))) // Set height based on popularity
+        .attr('x', d => xScale(d.genre))
+        .attr('y', d => height - (d.popularity * (height / maxPopularity)))
+        .attr('width', xScale.bandwidth())
+        .attr('height', d => d.popularity * (height / maxPopularity))
         .attr('fill', d => colorScale(d.popularity))
         .on('mouseover', function(event, d) {
             tooltip.transition()
@@ -70,7 +86,7 @@ function createHeatmap(data) {
                 .style("left", (event.pageX + 5) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
-        .on('mouseout', function(d) {
+        .on('mouseout', function() {
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
@@ -79,46 +95,38 @@ function createHeatmap(data) {
     // Adding Labels
     svg.append('text')
         .attr('text-anchor', 'end')
-        .attr('x', width / 2 + margin.left)
+        .attr('x', width / 2)
         .attr('y', height + margin.top + 40)
         .text('Manga Genres')
-        .attr("class", "axis-label");
+        .attr("class", "axis-label")
+        .attr('fill', 'white');
 
     svg.append('text')
         .attr('text-anchor', 'end')
         .attr('transform', 'rotate(-90)')
         .attr('y', -margin.left + 15)
-        .attr('x', -height / 2 + margin.top)
+        .attr('x', -height / 2)
         .text('Popularity')
-        .attr("class", "axis-label");
+        .attr("class", "axis-label")
+        .attr('fill', 'white');
 
-    // Adding genre labels on x-axis horizontally
-    svg.append('g')
-        .attr('transform', `translate(0, ${height})`)
-        .selectAll('text')
-        .data(data)
-        .enter()
-        .append('text')
-        .attr('x', d => xScale(d.genre) + xScale.bandwidth() / 2) // Center labels in their cells
-        .attr('y', 15) // Position the label slightly above the x-axis
-        .text(d => d.genre)
-        .attr('text-anchor', 'middle')
-        .attr('font-size', '10px') // Smaller font size
-        .attr('fill', '#333'); // Optional: change text color for better visibility
-
-    // Adding a legend (optional)
+    // Adding a legend
     const legend = svg.append('g')
-        .attr('transform', `translate(${width - 150}, 0)`);
+        .attr('transform', `translate(${width + 20}, 0)`);
 
     const legendHeight = 200;
     const legendWidth = 20;
 
     const legendScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.popularity)])
+        .domain([0, maxPopularity])
         .range([legendHeight, 0]);
 
+    const legendAxis = d3.axisRight(legendScale)
+        .ticks(5)
+        .tickFormat(d3.format(".0f"));
+
     legend.selectAll('rect')
-        .data(d3.range(0, d3.max(data, d => d.popularity), d3.max(data, d => d.popularity) / 10))
+        .data(d3.range(0, maxPopularity, maxPopularity / 10))
         .enter()
         .append('rect')
         .attr('y', d => legendScale(d))
@@ -126,19 +134,23 @@ function createHeatmap(data) {
         .attr('height', legendHeight / 10)
         .attr('fill', d => colorScale(d));
 
-    // Adding labels for legend
-    legend.selectAll('text')
-        .data(d3.range(0, d3.max(data, d => d.popularity), d3.max(data, d => d.popularity) / 10))
-        .enter()
-        .append('text')
-        .attr('y', d => legendScale(d) + (legendHeight / 20))
-        .attr('x', legendWidth + 5)
-        .text(d => d.toFixed(0));
+    legend.append("g")
+        .attr("class", "axis")
+        .attr("transform", `translate(${legendWidth}, 0)`)
+        .call(legendAxis);
+
+    // Adding a search input listener
+    const searchInput = d3.select('#genreSearch');
+    searchInput.on('input', function() {
+        const searchTerm = this.value;
+        highlightGenre(searchTerm, genreElements);
+    });
 }
 
-// Fetch data, process it, and create heatmap
+// Fetch data, process it, and create the heatmap
 fetchMangaData().then(mangaList => {
     const genreCounts = countGenres(mangaList);
     const heatmapData = prepareDataForD3(genreCounts);
     createHeatmap(heatmapData);
 });
+

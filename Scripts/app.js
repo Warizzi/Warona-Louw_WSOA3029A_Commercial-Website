@@ -90,6 +90,7 @@ function createScatterplot(data) {
         .attr('y', height + margin.top + 20)
         .text('Manga Genres')
         .attr("class", "axis-label")
+        .attr('fill', 'white')
 
     svg.append('text')
         .attr('text-anchor', 'end')
@@ -97,7 +98,8 @@ function createScatterplot(data) {
         .attr('y', -margin.left + 15)
         .attr('x', -height / 2 + margin.top)
         .text('Popularity')
-        .attr("class", "axis-label");
+        .attr("class", "axis-label")
+        .attr('fill', 'white');
 
     //Adding a legend 
     let legend = svg.append('g')

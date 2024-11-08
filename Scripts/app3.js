@@ -112,6 +112,18 @@ function createBubbleChart(data) {
         };
     }
 
+    // Click event to separate bubbles
+    svg.on('click', () => {
+        // Update the force simulation to separate bubbles on either side
+        simulation
+            .force('x', d3.forceX(d => {
+                // Condition: split alphabetically (A-M on left, N-Z on right)
+                return d.genre[0].toUpperCase() < 'N' ? -width / 4 : width / 4;
+            }).strength(0.3)) // Increase strength for faster separation
+            .alpha(0.5) // Increase alpha to restart the simulation
+            .restart();
+    });
+
     // Search functionality
     const searchInput = document.getElementById('genre-search');
     searchInput.addEventListener('input', () => {
@@ -136,7 +148,8 @@ function createBubbleChart(data) {
         .attr('text-anchor', 'middle')
         .attr('y', -circleRadius - 20)
         .style('font-size', '20px')
-        .text('Manga Genre Popularity Bubble Chart');
+        .text('Manga Genre Popularity Bubble Chart')
+        .attr('fill', 'white');
 }
 
 
