@@ -65,8 +65,10 @@ nav a:hover {
 main {
     padding: 40px;
     min-height: 500px;
-    text-align: center;
+    text-align: left;
 }
+
+
 
 
 /* Footer styles */

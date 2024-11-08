@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Warona Louw">
+    <meta name="description" content="Warona Louw's website">
+    <meta property="og:title" content="Warona Louw's Portfolio Website">
+    <meta property="og:description" content="Warona Louw's Interactive Media and Animation Portfolio">
+    <meta property="og:type" content="website">
+    <title>Document</title>
+    <script type="module"> import { initialise } from "../Scripts/menu.js"
+        initialise("Theory") </script>
+    <link rel="stylesheet" href="../CSS/Essay styling.css" />
+</head>
+</head>
+
+<body>
+    <header>
+        <h1>OtakuScoops</h1>
+        <h2>MY MANGA IS YOUR MANGA!</h2>
+
+        <nav>
+
+        </nav>
+
+
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="./Theory.html">Theory</a></li>
+            <li><a href="./Essay.html">Essay</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <article>
+            <h2>Critical Reflection Essay</h2>
+
+            <p>The digital age has dramatically reshaped the global economy, influencing how creative and artistic
+                projects are conceptualized, developed, and consumed. The advent of modern web technologies has enabled
+                the rise of independent creators and smaller-scale projects that can compete on a global scale. With my
+                project, OtakuScoops, I aimed to merge my passion for manga with cutting-edge web technologies, UI/UX
+                design principles, and interactive data visualizations to create a user-friendly manga discovery
+                platform. This essay critically reflects on the economic and artistic implications of the web
+                technologies employed, explores the design process in depth, and discusses the challenges faced.
+                Additionally, it evaluates how the project aligns with contemporary trends in international web
+                development, reflecting on the project's development journey from the perspective of a third-year
+                university student.</p>
+
+            <h3>Global Economics and Artistic Implications of Web Technologies</h3>
+
+            <p>The rapid evolution of web technologies such as JavaScript, HTML5, and CSS has democratized content
+                creation, allowing even independent developers like myself to reach a global audience. Using the
+                MangaDex API was a strategic decision that leveraged an extensive, diverse dataset of manga, embodying
+                the expansive and globally interconnected nature of the manga industry. The API serves as a gateway to
+                understanding the broader cultural exchange facilitated by the internet, where manga, originating from
+                Japan, has captivated audiences worldwide. This was the original intention of my website which I tried
+                to stay true to during the development process over the past few months. From an economic perspective,
+                opting for open-source technologies like d3.js for data visualization and GitHub Pages for hosting was a
+                deliberate choice to minimize costs seeing as this is a student project. This choice reflects the
+                broader trend in web development where developers increasingly use free and open-source tools to cut
+                down expenses and focus resources on creative aspects. Such an approach aligns with the "prosumer"
+                culture of the digital age, where users are both consumers and creators. By developing OtakuScoops, I
+                aimed to embody this dual role, creating a platform that caters to a niche community of manga readers
+                while reflecting my artistic vision.</p>
+
+            <h3>Design Process: Drawing Inspiration from Existing Manga Platforms</h3>
+            <p>When I began designing OtakuScoops, I conducted extensive research on established manga reading websites
+                such as Viz Media, MangaPlus, and Crunchyroll Manga. These platforms served as benchmarks, providing
+                insights into common design patterns, features, and user interface elements that appeal to manga
+                readers. One key takeaway was the consistent use of dark themes across most manga sites. The dark
+                background not only provides a visual aesthetic that resonates with the typical manga reader's
+                expectations but also enhances the readability of manga panels, which are predominantly black-and-white.
+                This is further backed by the fact that most readers who read on their phones prefer a darker themed
+                webpage rather than a bright coloured one as it does not put too much strain on the eyes and is user
+                friendly.</p>
+            <p>Inspired by these findings, I decided to implement a dark-themed aesthetic for OtakuScoops. The colour
+                scheme, consisting of dark grey tones for the background and white Arial font for text, was chosen to
+                reflect a minimalist style that mirrors the monochromatic nature of manga. The dark theme reduces eye
+                strain, especially during extended reading sessions, aligning with the common design approach seen in
+                popular manga platforms. Additionally, I wanted the colour scheme to evoke a sense of familiarity,
+                making users feel as though they are on a professional, well-established manga site, even though it is
+                an independent project. I also followed the pattern in how popular manga sites add in a manga panel
+                image, just so it firstly adds to the experience and so that users have an idea what the site is about
+                before they explore any further. </p>
+
+            <h3>UI/UX Design: Enhancing User Experience and Engagement</h3>
+            <p>Effective UI/UX design is essential in creating a user experience that is both meaningful and engaging.
+                During the design process, I focused on core principles such as usability, accessibility, and visual
+                hierarchy. One of the primary elements I implemented was a straightforward navigation bar, inspired by
+                my analysis of other manga sites, to ensure that users could easily find their way around. The
+                navigation bar features links to key sections such as "Home," "Genres," "Popular Manga," and "Data
+                Visualizations," with the intention of enabling users to explore the site effortlessly.
+                In keeping with the community-focused spirit of manga culture, I included a welcoming header section
+                with the tagline "My Manga is Your Manga!" This phrase encapsulates the shared enthusiasm and communal
+                aspect of manga fandom, setting a tone that invites users to discover and enjoy manga together.
+            </p>
+            <p>A standout feature of OtakuScoops is the interactive bubble chart, designed to visualize manga genre
+                popularity using d3.js. Choosing a bubble chart was a strategic decision based on its ability to
+                represent categorical data effectively. The varying sizes of the bubbles indicate the relative
+                popularity of different genres, providing users with a visual representation of trending manga
+                categories. This choice was also inspired by the data-driven approaches seen on sites like MAL
+                (MyAnimeList), where users often rely on visual cues and rankings to discover new manga.
+                Despite the detailed planning, some UI/UX elements did not make it into the final version of the site.
+                One of the features I initially planned to include was displaying manga images or thumbnails alongside
+                genre information. However, due to technical limitations and time constraints, particularly challenges
+                with reliably fetching image URLs through the API, this feature had to be postponed. I also intended to
+                implement a manga reader interface that would allow users to read selected manga directly on the site,
+                similar to the interfaces seen on MangaPlus and Viz Media. However, this required a more advanced
+                integration with the MangaDex API and additional backend development, which was beyond the scope of this
+                initial phase of the project.
+            </p>
+
+            <h3>The Role of Interactivity in Enhancing User Experience</h3>
+
+            <p>Interactivity is a cornerstone of modern web design, transforming passive user experiences into engaging,
+                dynamic ones. In OtakuScoops, I aimed to integrate interactivity throughout the site to enhance user
+                engagement. The interactive bubble chart exemplifies this approach, allowing users to hover over bubbles
+                to view detailed information about each genre, including the number of manga titles available and their
+                popularity rankings. This feature was inspired by the interactive visualizations used in professional
+                data journalism, where readers can explore data intuitively and derive their own insights.
+                Additionally, I incorporated search and filter functionalities within the data visualization, enabling
+                users to tailor their experience based on their interests. Users can filter genres or search for
+                specific categories, making it easier to find manga that matches their preferences. </p>
+            <p>This level of user control is a key UX principle that prioritizes user autonomy, thereby increasing
+                satisfaction and engagement.
+                Beyond data visualization, I paid attention to micro-interactions, such as hover effects on navigation
+                links and tooltips on data points. These subtle interactions provide immediate feedback, making the site
+                feel responsive and interactive. They add a layer of professionalism to the user experience, reflecting
+                my commitment to creating a polished, engaging platform that meets international web development
+                standards.
+            </p>
+
+            <h3>Challenges Encountered and Solutions Implemented</h3>
+            <p>Developing OtakuScoops was not without its challenges. One significant issue I faced was integrating the
+                MangaDex API with my site. Initially, I encountered problems with data retrieval, where API requests
+                would sometimes fail or return incomplete data. To address this, I implemented error handling mechanisms
+                in my JavaScript code, ensuring smoother data fetching and a better user experience. I also experimented
+                with different API endpoints to identify the most reliable sources of data, enhancing the stability of
+                the site's features.</p>
+
+            <p>Another major challenge was achieving a consistent aesthetic design across various devices. Given the
+                range of devices that users might access the site from, it was essential to ensure a responsive design.
+                I employed CSS media queries to adapt the layout for different screen sizes, optimizing the user
+                experience for both desktop and mobile users. For instance, on smaller screens, the navigation menu
+                automatically switches from a horizontal to a vertical layout, improving usability for mobile visitors.
+                Though this was the intention, there are still areas for improvement which I aim to keep in mind for the
+                future.</p>
+            <p>Finally, deploying the site on GitHub Pages presented issues, as updates were not immediately reflecting
+                on the live site. This was resolved by thoroughly revisiting the build and deployment process, ensuring
+                that all changes were correctly committed and pushed. By adjusting my deployment workflow, I aligned my
+                project with best practices in continuous integration and deployment, a crucial aspect of professional
+                web development which was highlighted to me in my previous assignment.</p>
+
+            <h3>Alignment with Professional Practices in International Web Development</h3>
+
+            <p>The design and development of OtakuScoops,was made with an attempt to align closely with industry
+                standards in international web development. The use of responsive design, adherence to accessibility
+                principles, and implementation of user-centered design reflect practices commonly seen in professional
+                projects. By leveraging industry-standard tools like d3.js for data visualization and GitHub for version
+                control, I followed best practices in modern web development to the best of my ability in the time that
+                I had. </p>
+            <p>Moreover, the focus on interactivity and user engagement aligns with contemporary trends in web design,
+                where immersive experiences are prioritized. My commitment to ensuring accessibility, such as optimizing
+                text readability and intuitive navigation, reflects the increasing emphasis on inclusivity in the field.
+            </p>
+
+            <h3>Conclusion</h3>
+            <p>Developing OtakuScoops has been a valuable learning experience, merging global economic perspectives with
+                the artistic potential of modern web technologies. By utilizing tools like the MangaDex API and d3.js, I
+                created a platform that celebrates manga culture while providing a dynamic, interactive user experience.
+                The design choices, from the dark-themed aesthetic inspired by established manga platforms to the
+                interactive data visualizations, were informed by a focus on accessibility, user engagement, and
+                alignment with industry standards.</p>
+            <p>The challenges faced, particularly in data integration and achieving responsive design, were instrumental
+                in deepening my understanding of the complexities of web development. The solutions implemented reflect
+                a proactive approach to problem-solving, showcasing my ability to navigate issues effectively.
+                Ultimately, OtakuScoops stands as a testament to the power of modern web technologies and UI/UX design
+                in creating meaningful digital experiences. It embodies current trends in international web development,
+                where user-centered design, interactivity, and accessibility converge to build platforms that are both
+                functional and engaging. As the project evolves, I look forward to refining its features and exploring
+                new opportunities in the dynamic field of digital media. </p>
+        </article>
+    </main>
+
+
+    <footer>
+
+    </footer>
+
+    <script src="../Scripts/footer.js"></script>
+
+</body>
+
+</html>
