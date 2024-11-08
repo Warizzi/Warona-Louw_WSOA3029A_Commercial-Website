@@ -1,3 +1,4 @@
+
 // Defines the root path for the website
 const root = "/Warona Louw_WSOA3029A_Commercial Website";
 
@@ -26,5 +27,4 @@ export function initialise(currentPage) {
         } else { li.innerText = menuItem.name }
         ul.appendChild(li)
     }
-    nav.appendChild(ul)
-}
+    nav.appendChild(ul)}

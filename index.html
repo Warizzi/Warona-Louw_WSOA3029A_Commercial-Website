@@ -9,9 +9,11 @@
     <meta property="og:title" content="Warona Louw's Portfolio Website">
     <meta property="og:description" content="Warona Louw's Interactive Media and Animation Portfolio">
     <meta property="og:type" content="website">
-    <title>Document</title>
-    <script type="module"> import { initialise } from "./Scripts/menu.js"
-        initialise("Home") </script>
+    <title>OtakuScoops - Feedback Form</title>
+    <script type="module">
+        import { initialise } from "./Scripts/menu.js";
+        initialise("Home");
+    </script>
     <link rel="stylesheet" href="./CSS/General styling.css" />
 </head>
 
@@ -21,20 +23,53 @@
         <h2>MY MANGA IS YOUR MANGA!</h2>
 
         <nav>
-
+            
         </nav>
-
-
     </header>
-
 
     <main>
         <p>Are you a fellow enthusiast of all things manga or graphic novel related? Welcome to OtakuScoops!!! The only
-            place you need to sit back, relax and read manga all day</p>
+            place you need to sit back, relax, and read manga all day</p>
 
-            <img src="./Images/Gojo image.png" class="u-photo" alt="gojo image" height="250px"
-            width="400px">
+        <img src="./Images/Gojo image.png" class="u-photo" alt="Gojo image" height="250px" width="400px">
 
+        <section>
+            <h3>Send Us Your Feedback</h3>
+            <form id="feedbackForm" novalidate>
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <small id="nameError" class="error-message"></small>
+                </div>
+
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <small id="emailError" class="error-message"></small>
+                </div>
+
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Create a Password" required>
+                    <small id="passwordError" class="error-message"></small>
+                </div>
+
+                <div>
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                    <small id="phoneError" class="error-message"></small>
+                </div>
+
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Your Feedback" required></textarea>
+                    <small id="messageError" class="error-message"></small>
+                </div>
+
+                <button type="submit">Submit Feedback</button>
+                <p id="successMessage" class="success-message"></p>
+            </form>
+        </section>
     </main>
 
     <hr>
@@ -43,7 +78,7 @@
     </footer>
 
     <script src="Scripts/footer.js"></script>
-
+    <script src="Scripts/feedbackForm.js"></script>
 </body>
 
 </html>
