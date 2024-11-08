@@ -112,6 +112,25 @@ function createBubbleChart(data) {
         };
     }
 
+    // Search functionality
+    const searchInput = document.getElementById('genre-search');
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        // Reset all bubbles to default opacity and stroke
+        bubbles.style('opacity', 0.7).attr('stroke-width', 1).attr('stroke', 'black');
+
+        if (searchTerm) {
+            const foundBubble = bubbles.filter(d => d.genre.toLowerCase() === searchTerm);
+
+            // Highlight found bubbles by increasing opacity and stroke width
+            foundBubble
+                .style('opacity', 1)
+                .attr('stroke-width', 3)
+                .attr('stroke', 'red');
+        }
+    });
+
     // Adding title label
     svg.append('text')
         .attr('text-anchor', 'middle')
@@ -119,6 +138,9 @@ function createBubbleChart(data) {
         .style('font-size', '20px')
         .text('Manga Genre Popularity Bubble Chart');
 }
+
+
+
 
 // Fetch data, process it, and create bubble chart
 fetchMangaData().then(mangaList => {
