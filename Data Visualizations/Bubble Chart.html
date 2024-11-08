@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,38 +12,54 @@
     <title>Document</title>
     <script type="module"> import { initialise } from "../Scripts/menu.js"
         initialise("Data Visualizations") </script>
-        <link rel="stylesheet" href="../CSS/General styling.css" />
-    </head>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../Scripts/app3.js"></script>
+    <link rel="stylesheet" href="../CSS/General styling.css" />
 </head>
+</head>
+
 <body>
     <header>
         <h1>OtakuScoops</h1>
         <h2>MY MANGA IS YOUR MANGA!</h2>
 
         <nav>
-            
+
         </nav>
 
 
     </header>
-    
+
     <main>
         <nav>
             <ul>
                 <li><a href="./Scatterplot.html">Scatterplot</a></li>
-                <li><a href="./Heatmap.html">Heatmap</a></li>
+                <li><a href="./Data Visualizations.html">Data Visualizations</a></li>
                 <li><a href="./Bubble Chart.html">Bubble Chart</a></li>
+
             </ul>
         </nav>
 
+        <h3>Bubble Chart</h3>
+
+        <div id="chart"></div>
+       
+
+
+
+        <nav>
+            <a href="#Top">Back to Top</a>
+        </nav>
+        <hr>
     </main>
 
-    <hr>
+
     <footer>
 
     </footer>
-    
-    <script src = "../Scripts/footer.js"></script>
-    
+
+    <script src="../Scripts/footer.js"></script>
+
 </body>
+
 </html>
